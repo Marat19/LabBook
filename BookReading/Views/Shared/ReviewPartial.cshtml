@@ -1,0 +1,37 @@
+﻿@model List<BookReading.Models.Review>
+
+<fieldset>
+    <legend>Отзывы</legend>
+
+
+    <table class="table table-hover">
+        <thead class="thead-inverse">
+            <tr>
+                <th scope="col">Автор</th>
+                <th scope="col">Отзыв</th>
+                <th scope="col">Понравилось</th>
+                <th scope="col">Пожаловаться</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var review in Model)
+            {
+                if (!string.IsNullOrEmpty(@review.ReportReason))
+                {
+                    continue;
+                }
+
+                <tr>
+                    <td>@Html.DisplayFor(m => review.AuthorId)</td>
+                    <td>@Html.DisplayFor(m => review.Text)</td>
+                    <td class="like-btn" data-review="@review.Id">
+                       <span>Лайкнуть: @Html.DisplayFor(m => review.LikeCount)</span>
+                    </td>
+                    <td class="report-btn" data-review="@review.Id">
+                       <span>Пожаловаться</span>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</fieldset>
